@@ -14,10 +14,10 @@ public class StaffMember
     String name;
     String email;
     long contactNo;
-    Genders gender;
+    String gender;
     Boolean isWorking;
     
-    StaffMember(int id, String name, String email, long contactNo, Genders gender)
+    StaffMember(int id, String name, String email, long contactNo, String gender)
     {
         this.id = id;
         this.name = name;
@@ -25,35 +25,5 @@ public class StaffMember
         this.contactNo = contactNo;
         this.gender = gender;
         this.isWorking = false;
-    }
-    
-    void setName(String newName)
-    {
-        this.name = newName;
-    }
-    void setEmail(String newEmail)
-    {
-        this.email = newEmail;
-    }
-    void setName(long newCNo)
-    {
-        this.contactNo = newCNo;
-    }
-    void setName(Genders newG)
-    {
-        this.gender = newG;
-    }
-    void SetStatus(Boolean b)
-    {
-        this.isWorking = b;
-    }
-    
-    
-    
-    enum Genders
-    {
-        MALE,
-        FEMALE,
-        NONBINARY 
     }
 }
