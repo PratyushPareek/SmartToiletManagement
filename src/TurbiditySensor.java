@@ -10,5 +10,8 @@
  */
 public class TurbiditySensor 
 {
-    
+    Boolean checkCondition()
+    {
+        return true;
+    }
 }

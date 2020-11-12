@@ -8,6 +8,10 @@
  *
  * @author praty
  */
-public class GasSensor {
-    
+public class GasSensor 
+{
+    Boolean checkCondition()
+    {
+        return true;
+    }
 }
