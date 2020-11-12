@@ -8,6 +8,30 @@
  *
  * @author praty
  */
-public class Toilet {
+public class Toilet 
+{
+    int id;
+    TurbiditySensor ts;
+    GasSensor gs;
+    String gender;
+    Boolean isClean;
     
+    Toilet(int id, String g)
+    {
+        this.id=id;
+        this.gender = g;
+        this.ts = new TurbiditySensor();
+        this.gs = new GasSensor();
+        this.isClean = true;
+    }        
+    
+    Boolean checkConditions()
+    {
+        if(!(ts.checkCondition()||gs.checkCondition()))
+        {
+            this.isClean = false;
+            return false;
+        }
+        else return true;
+    }   
 }

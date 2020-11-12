@@ -127,7 +127,7 @@ public class Staff
         }catch(Exception e){JOptionPane.showMessageDialog(null,e);}  
     }        
     
-    void getJanitor (int tid, String tg)
+    public static void getJanitor (int tid, String tg)
     {
         int smid;
         if(tg=="M")
@@ -153,7 +153,15 @@ public class Staff
         sendAlert(tid,smid);
     }
     
-    void sendAlert(int tid, int smid)
+    public static int generateID()
+    {
+        int id = -1;
+        for(StaffMember sm : StaffTable)
+            id = (sm.id>id)?sm.id:id;
+        return ++id;
+    }
+    
+    public static void sendAlert(int tid, int smid)
     {
         
     }
