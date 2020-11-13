@@ -10,8 +10,12 @@
  */
 public class TurbiditySensor 
 {
+    public static double threshold = 600;
+    
     Boolean checkCondition()
     {
-        return true;
+        if(Math.random()*900<threshold)
+            return true;
+        else return false;
     }
 }

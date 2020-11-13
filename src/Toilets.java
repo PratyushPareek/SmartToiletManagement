@@ -1,6 +1,7 @@
 
 import java.sql.*;
 import java.util.*;
+import javax.swing.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,26 +37,36 @@ public class Toilets
                 int i = sqltable.getInt("ID");
                 String g = sqltable.getString("Gender");
                 ToiletTable.add(new Toilet(i,g));
-                if(g=="M")
-                    MQueue.add(i);
-                else FQueue.add(i);
             }
         }catch(Exception e){System.out.println(e);}  
     }
     
     public static void checkCycle()
     {
-            for(Toilet t: ToiletTable)
+        for(Toilet t: ToiletTable)
+        {
+            if(t.isClean && !t.checkConditions())
             {
-                if(!t.checkConditions())
-                {
-                    if(t.gender=="M")
-                        MQueue.addLast(t.id);
-                    else FQueue.addLast(t.id);
-                    t.isClean = false;
-                }
+                if(t.gender.contains("M"))
+                    MQueue.addLast(t.id);
+                else FQueue.addLast(t.id);
+                t.isClean = false;
+                System.out.println(t.id + " is unclean.");
             }
-    }        
+        }            
+    }
+    
+    public static Toilet findToiletByID(int id)
+    {
+        try{
+            for(Toilet t : ToiletTable)
+            {
+                if(t.id==id)
+                    return t;
+            }
+        }catch(Exception e){JOptionPane.showMessageDialog(null,e);}
+        return null;
+    }
 
     public static Connection getConnection() 
     {
@@ -67,13 +78,5 @@ public class Toilets
                 return conn;
         }catch(Exception e){System.out.println(e);}
         return null;
-    }
-    
-    public static int generateID()
-    {
-        int id = -1;
-        for(Toilet t : ToiletTable)
-            id = (t.id>id)?t.id:id;
-        return ++id;
     }
 }
