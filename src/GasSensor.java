@@ -10,8 +10,12 @@
  */
 public class GasSensor 
 {
+    public static double threshold = 4;
+    
     Boolean checkCondition()
     {
-        return true;
+        if(Math.random()*5<threshold)
+            return true;
+        else return false;
     }
 }

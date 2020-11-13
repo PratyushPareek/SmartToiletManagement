@@ -12,6 +12,32 @@
 import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
+import java.lang.*;
+
+class BGCleaned implements Runnable
+{            
+    int tid;
+    String g;
+    int smid;
+            
+    BGCleaned(int tid, String g, int smid)
+    {
+        this.tid = tid;
+        this.g = g;
+        this.smid = smid;
+    }        
+    @Override 
+    public void run() 
+    {
+        try{Thread.sleep(5000);}catch(Exception e){System.out.println(e);}
+        Toilets.findToiletByID(tid).isClean = true;
+        Staff.findMemberByID(smid).isWorking = false;
+        System.out.println(tid+" was cleaned by "+smid);
+        if(g.contains("M"))
+            Staff.MStaffQueue.addLast(smid);
+        else Staff.FStaffQueue.addLast(smid);   
+    }
+}
 
 public class Staff 
 {
@@ -40,7 +66,7 @@ public class Staff
                 long c = sqltable.getLong("ContactNo");
                 String g = sqltable.getString("Gender");
                 StaffTable.add(new StaffMember(i,n,e,c,g));
-                if(g=="M")
+                if(g.contains("M"))
                     MStaffQueue.add(i);
                 else FStaffQueue.add(i);
             }
@@ -80,7 +106,7 @@ public class Staff
         Connection conn = getConnection();
         try{
             Statement stmt = (Statement)conn.createStatement();
-            String u = "INSERT INTO Staff VALUES("+n.id+",\""+n.name+"\",\""+n.email+"\","+n.contactNo+",\""+n.gender+");";
+            String u = "INSERT INTO Staff VALUES("+n.id+",'"+n.name+"','"+n.email+"',"+n.contactNo+",'"+n.gender+"');";
             stmt.executeUpdate(u);
         }catch(Exception e){JOptionPane.showMessageDialog(null,e);}    
     }
@@ -98,7 +124,7 @@ public class Staff
         Connection conn = getConnection();
         try{
             Statement stmt = (Statement)conn.createStatement();
-            String u = "DELETE * FROM Staff WHERE ID="+id;
+            String u = "DELETE FROM Staff WHERE ID="+id+";";
             stmt.executeUpdate(u);
         }catch(Exception e){JOptionPane.showMessageDialog(null,e);}    
     }        
@@ -120,42 +146,42 @@ public class Staff
         Connection conn = getConnection();
         try{
             Statement stmt = (Statement)conn.createStatement();
-            String u = "DELETE * FROM Staff WHERE ID="+t.id;
-            String v = "INSERT INTO Staff VALUES("+t.id+",\""+t.name+"\",\""+t.email+"\","+t.contactNo+",\""+t.gender+");";
+            String u = "DELETE FROM Staff WHERE ID="+t.id+";";
+            String v = "INSERT INTO Staff VALUES("+t.id+",'"+t.name+"','"+t.email+"',"+t.contactNo+",'"+t.gender+"');";
             stmt.executeUpdate(u);
             stmt.executeUpdate(v);
         }catch(Exception e){JOptionPane.showMessageDialog(null,e);}  
     }        
     
-    public static void getJanitor (int tid, String tg)
+    public static void assignCycle()
     {
-        int smid;
-        if(tg=="M")
+        if(!Toilets.MQueue.isEmpty()&&!MStaffQueue.isEmpty())
         {
-            smid = MStaffQueue.getFirst();
-            MStaffQueue.removeFirst();
-            MStaffQueue.addLast(smid);
+            sendAlert(Toilets.MQueue.getFirst(),MStaffQueue.getFirst());
+            findMemberByID(MStaffQueue.getFirst()).isWorking = true;
+            System.out.println(Toilets.MQueue.getFirst() + " is being cleaned by " + MStaffQueue.getFirst());
             
+            new Thread(new BGCleaned(Toilets.MQueue.getFirst(),"M",MStaffQueue.getFirst())).start();
+            
+            Toilets.MQueue.removeFirst();
+            MStaffQueue.removeFirst();
         }
-        else
-        {    
-            smid = FStaffQueue.getFirst();
+        if(!Toilets.FQueue.isEmpty()&&!FStaffQueue.isEmpty())
+        {
+            sendAlert(Toilets.FQueue.getFirst(),FStaffQueue.getFirst());
+            findMemberByID(FStaffQueue.getFirst()).isWorking = true;
+            System.out.println(Toilets.FQueue.getFirst() + " is being cleaned by " + FStaffQueue.getFirst());
+            
+            new Thread(new BGCleaned(Toilets.FQueue.getFirst(),"F",FStaffQueue.getFirst())).start();
+            
+            Toilets.FQueue.removeFirst();
             FStaffQueue.removeFirst();
-            FStaffQueue.addLast(smid);
-        }    
-        try{
-            for(StaffMember sm : StaffTable)
-            {
-                if(sm.id==smid)
-                    sm.isWorking = true;
-            }
-        }catch(Exception e){JOptionPane.showMessageDialog(null,e);}
-        sendAlert(tid,smid);
-    }
+        }
+    }        
     
     public static int generateID()
     {
-        int id = -1;
+        int id = 0;
         for(StaffMember sm : StaffTable)
             id = (sm.id>id)?sm.id:id;
         return ++id;
