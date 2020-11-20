@@ -1,3 +1,6 @@
+
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +13,12 @@
  */
 public class ToiletStatus extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ToiletStatus
-     */
+    DefaultTableModel model;
+    
     public ToiletStatus() {
         initComponents();
+        
+        model = (DefaultTableModel) jTable1.getModel();
     }
 
     /**
@@ -34,6 +38,8 @@ public class ToiletStatus extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setBackground(new java.awt.Color(5, 10, 46));
         jPanel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -110,6 +116,7 @@ public class ToiletStatus extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
