@@ -354,6 +354,7 @@ public class Update extends javax.swing.JFrame {
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
         // TODO add your handling code here:
         id.setText(Integer.toString(s.id));
+        id.setEditable(false);
     }//GEN-LAST:event_idActionPerformed
 
     /**

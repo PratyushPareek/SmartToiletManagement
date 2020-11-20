@@ -42,7 +42,6 @@ public class Searchstaff extends javax.swing.JFrame {
         setBackground(new java.awt.Color(0, 204, 240));
         setForeground(java.awt.Color.white);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(715, 550));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
 
@@ -97,7 +96,6 @@ public class Searchstaff extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setBackground(new java.awt.Color(0, 204, 240));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
