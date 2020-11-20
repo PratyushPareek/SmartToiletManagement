@@ -251,18 +251,6 @@ public class Register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_contactActionPerformed
 
-    public static Connection Register(String id, String name, String email, String contactNo) {
-        try{
-		String url = "jdbc:mysql://localhost:3306/Pristine";
-		String username = "Shade";
-		String password = "Philadelphia";
-		Connection conn = DriverManager.getConnection(url,username,password);
-                Statement stmt = (Statement) conn.createStatement();
-                String cmnd = "INSERT INTO Staff values ("+id+",\""+name+"\",\""+email+"\","+contactNo+");";
-                stmt.executeUpdate(cmnd);
-        }catch(Exception e){System.out.println(e);}
-        return null;
-    }
     
 
     

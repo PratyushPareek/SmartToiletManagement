@@ -1,5 +1,5 @@
 
-import java.sql.*;
+//import java.sql.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -21,38 +21,45 @@ public class Toilets
     
     public static void setup()
     {
-        //Got the connection
+        /*
         Connection conn = getConnection();
         try
         {
-            //Created a statement
             Statement stmt = (Statement)conn.createStatement();
             String q = "SELECT * FROM Toilets ORDER BY ID;";
-            //Caught query's return 
             ResultSet sqltable = stmt.executeQuery(q);
             
-            //Added it to Vector
             while(sqltable.next())
             {
                 int i = sqltable.getInt("ID");
                 String g = sqltable.getString("Gender");
                 ToiletTable.add(new Toilet(i,g));
             }
-        }catch(Exception e){System.out.println(e);}  
+        }catch(Exception e){System.out.println(e);}
+        */
+        ToiletTable.add(new Toilet(1,"M"));
+        ToiletTable.add(new Toilet(2,"F"));
+        ToiletTable.add(new Toilet(3,"M"));
+        ToiletTable.add(new Toilet(4,"F"));
+        ToiletTable.add(new Toilet(5,"M"));
+        ToiletTable.add(new Toilet(6,"F"));
     }
     
     public static void checkCycle()
     {
         for(Toilet t: ToiletTable)
         {
-            if(t.isClean && !t.checkConditions())
+            if(t.isClean)
             {
-                if(t.gender.contains("M"))
-                    MQueue.addLast(t.id);
-                else FQueue.addLast(t.id);
-                t.isClean = false;
-                try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis()) +" | Toilet "+t.id+" is unclean. \n");}
-                catch(Exception e){System.out.println(e);}
+                t.getConditions();
+                if(!t.checkConditions())
+                {    
+                    if(t.gender.contains("M"))
+                        MQueue.addLast(t.id);
+                    else FQueue.addLast(t.id);
+                    try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis()) +" | Toilet "+t.id+" is unclean. | Gas Sensor: "+t.gs.value+"V |"+"Turbidity Sensor: "+t.ts.value+"NTU |\n");}
+                    catch(Exception e){System.out.println(e);}
+                }
             }
         }            
     }
@@ -68,7 +75,8 @@ public class Toilets
         }catch(Exception e){JOptionPane.showMessageDialog(null,e);}
         return null;
     }
-
+    
+    /*
     public static Connection getConnection() 
     {
         try{
@@ -80,4 +88,5 @@ public class Toilets
         }catch(Exception e){System.out.println(e);}
         return null;
     }
+    */
 }

@@ -25,6 +25,12 @@ public class Toilet
         this.isClean = true;
     }        
     
+    void getConditions()
+    {
+        gs.getCondition();
+        ts.getCondition();
+    }        
+    
     Boolean checkConditions()
     {
         if(!(ts.checkCondition()||gs.checkCondition()))

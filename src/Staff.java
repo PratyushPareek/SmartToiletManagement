@@ -50,17 +50,14 @@ public class Staff
     
     public static void setup()
     {
-        //Got the connection
+        /*
         Connection conn = getConnection();
         try
         {
-            //Created a statement
             Statement stmt = (Statement)conn.createStatement();
             String q = "SELECT * FROM Staff ORDER BY ID;";
-            //Caught query's return 
             ResultSet sqltable = stmt.executeQuery(q);
             
-            //Added it to Vector
             while(sqltable.next())
             {
                 int i = sqltable.getInt("ID");
@@ -73,7 +70,14 @@ public class Staff
                     MStaffQueue.add(i);
                 else FStaffQueue.add(i);
             }
-        }catch(Exception e){System.out.println(e);}    
+        }catch(Exception e){System.out.println(e);} 
+        */
+        StaffTable.add(new StaffMember(2,"Arya Stark","noOne@fakemail.com",1234567890,"F"));
+        StaffTable.add(new StaffMember(3,"Jon Snow","bastard@fakemail.com",1834567890,"M"));
+        StaffTable.add(new StaffMember(4,"Sansa Stark","princess@fakemail.com",1294567890,"F"));
+        StaffTable.add(new StaffMember(5,"Robb Stark","wolfie@fakemail.com",1634567890,"M"));
+        StaffTable.add(new StaffMember(6,"Catelyn Stark","cat@fakemail.com",1934567890,"F"));
+        StaffTable.add(new StaffMember(7,"Theon Greyjoy","reek@fakemail.com",1534567890,"M"));
     }
     
     public static Vector<StaffMember> findMemberByName(String name)
@@ -105,13 +109,17 @@ public class Staff
     public static void addMember (StaffMember n)
     {
         StaffTable.add(n);
-        
+        if(n.gender.contains("M"))
+            MStaffQueue.addFirst(n.id);
+        else FStaffQueue.addFirst(n.id);
+        /*
         Connection conn = getConnection();
         try{
             Statement stmt = (Statement)conn.createStatement();
             String u = "INSERT INTO Staff VALUES("+n.id+",'"+n.name+"','"+n.email+"',"+n.contactNo+",'"+n.gender+"');";
             stmt.executeUpdate(u);
-        }catch(Exception e){JOptionPane.showMessageDialog(null,e);}    
+        }catch(Exception e){JOptionPane.showMessageDialog(null,e);}  
+        */
     }
     
     public static void deleteMember (int id)
@@ -124,12 +132,14 @@ public class Staff
                break;
            }
         }
+        /*
         Connection conn = getConnection();
         try{
             Statement stmt = (Statement)conn.createStatement();
             String u = "DELETE FROM Staff WHERE ID="+id+";";
             stmt.executeUpdate(u);
-        }catch(Exception e){JOptionPane.showMessageDialog(null,e);}    
+        }catch(Exception e){JOptionPane.showMessageDialog(null,e);} 
+        */
     }        
     
     public static void updateInfo(StaffMember t)
@@ -145,7 +155,7 @@ public class Staff
                break;
            }
         }
-        
+        /*
         Connection conn = getConnection();
         try{
             Statement stmt = (Statement)conn.createStatement();
@@ -153,7 +163,8 @@ public class Staff
             String v = "INSERT INTO Staff VALUES("+t.id+",'"+t.name+"','"+t.email+"',"+t.contactNo+",'"+t.gender+"');";
             stmt.executeUpdate(u);
             stmt.executeUpdate(v);
-        }catch(Exception e){JOptionPane.showMessageDialog(null,e);}  
+        }catch(Exception e){JOptionPane.showMessageDialog(null,e);} 
+        */
     }        
     
     public static void assignCycle()
@@ -194,19 +205,22 @@ public class Staff
     
     public static void sendAlert(int tid, int smid)
     {
-        
-        try
+        if(!findMemberByID(smid).email.contains("fakemail"))
         {
-            Email mail = new Email("nightmareDarkrai26@gmail.com","don'tLook26*");
-            mail.setFrom("nightmareDarkrai26@gmail.com","Crimson Shade");
-            mail.setSubject("Get back to work");
-            mail.setContent("<body>Dear "+findMemberByID(smid).name+",<br>"+"You have been assigned to clean Toilet "+tid+"<br>Get back to work immediately.<br>"+"<br>Yours truly, <br>Admin Gupta</body>" , "text/html");
-            mail.addRecipient(findMemberByID(smid).email);
-            mail.send();
+            try
+            {
+                Email mail = new Email("nightmareDarkrai26@gmail.com","don'tLook26*");
+                mail.setFrom("nightmareDarkrai26@gmail.com","Crimson Shade");
+                mail.setSubject("Get back to work");
+                mail.setContent("<body>Dear "+findMemberByID(smid).name+",<br>"+"You have been assigned to clean Toilet <b>"+tid+"<b>. Get back to work immediately.<br>"+"<br>Yours truly, <br>Admin Gupta</body>" , "text/html");
+                mail.addRecipient(findMemberByID(smid).email);
+                mail.send();
+            }
+            catch(Exception e){System.out.println(e);}    
         }
-        catch(Exception e){System.out.println(e);}
     } 
-
+    
+    /*
     public static Connection getConnection() 
     {
         try{
@@ -217,5 +231,5 @@ public class Staff
                 return conn;
         }catch(Exception e){System.out.println(e);}
         return null;
-    }
+    }*/
 }
