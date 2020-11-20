@@ -33,7 +33,7 @@ public class Toilet
     
     Boolean checkConditions()
     {
-        if(!(ts.checkCondition()||gs.checkCondition()))
+        if(!ts.checkCondition()||!gs.checkCondition())
         {
             this.isClean = false;
             return false;

@@ -19,7 +19,7 @@ public class Log
     
     Log(Date time)
     {
-        this.file = new File(time.toString().replace(":","-")+".txt");
+        this.file = new File("Log "+time.toString().replace(":","_")+".txt");
         try
         {
             file.createNewFile();

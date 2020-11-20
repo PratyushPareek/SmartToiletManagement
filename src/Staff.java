@@ -78,6 +78,16 @@ public class Staff
         StaffTable.add(new StaffMember(5,"Robb Stark","wolfie@fakemail.com",1634567890,"M"));
         StaffTable.add(new StaffMember(6,"Catelyn Stark","cat@fakemail.com",1934567890,"F"));
         StaffTable.add(new StaffMember(7,"Theon Greyjoy","reek@fakemail.com",1534567890,"M"));
+        
+        /**/StaffTable.add(new StaffMember(1,"Woody Allen","pareekpratyush2626@gmail.com",1634567890,"M"));
+
+        
+        for(StaffMember s : StaffTable)
+        {
+            if(s.gender.contains("M"))
+                MStaffQueue.addLast(s.id);
+            else FStaffQueue.addLast(s.id);
+        }    
     }
     
     public static Vector<StaffMember> findMemberByName(String name)
@@ -211,8 +221,8 @@ public class Staff
             {
                 Email mail = new Email("nightmareDarkrai26@gmail.com","don'tLook26*");
                 mail.setFrom("nightmareDarkrai26@gmail.com","Crimson Shade");
-                mail.setSubject("Get back to work");
-                mail.setContent("<body>Dear "+findMemberByID(smid).name+",<br>"+"You have been assigned to clean Toilet <b>"+tid+"<b>. Get back to work immediately.<br>"+"<br>Yours truly, <br>Admin Gupta</body>" , "text/html");
+                mail.setSubject("Time to work!");
+                mail.setContent("<body>Dear "+findMemberByID(smid).name+",<br>"+"You have been assigned to clean Toilet <b>"+tid+"</b>. Get back to work immediately.<br>"+"<br>Your boss,<br>Admin Gupta</body>" , "text/html");
                 mail.addRecipient(findMemberByID(smid).email);
                 mail.send();
             }

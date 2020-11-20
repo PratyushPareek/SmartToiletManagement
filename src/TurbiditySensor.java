@@ -10,11 +10,22 @@
  */
 public class TurbiditySensor 
 {
-    public static double threshold = 600;
+    public static double threshold = 750;
+    double value;
+    
+    TurbiditySensor()
+    {
+        this.value = 0;
+    }        
+    
+    void getCondition()
+    {
+        this.value = Math.random()*900;
+    }
     
     Boolean checkCondition()
     {
-        if(Math.random()*900<threshold)
+        if(this.value<threshold)
             return true;
         else return false;
     }

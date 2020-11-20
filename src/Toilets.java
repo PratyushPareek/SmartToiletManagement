@@ -42,7 +42,6 @@ public class Toilets
         ToiletTable.add(new Toilet(3,"M"));
         ToiletTable.add(new Toilet(4,"F"));
         ToiletTable.add(new Toilet(5,"M"));
-        ToiletTable.add(new Toilet(6,"F"));
     }
     
     public static void checkCycle()
@@ -57,7 +56,7 @@ public class Toilets
                     if(t.gender.contains("M"))
                         MQueue.addLast(t.id);
                     else FQueue.addLast(t.id);
-                    try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis()) +" | Toilet "+t.id+" is unclean. | Gas Sensor: "+t.gs.value+"V |"+"Turbidity Sensor: "+t.ts.value+"NTU |\n");}
+                    try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis()) +" | Toilet "+t.id+" is unclean. | Gas Sensor: "+String.format("%.2f",t.gs.value)+"V |"+"Turbidity Sensor: "+String.format("%.2f",t.ts.value)+"NTU |\n");}
                     catch(Exception e){System.out.println(e);}
                 }
             }

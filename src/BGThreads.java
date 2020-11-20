@@ -20,7 +20,6 @@ class BGThreads implements Runnable
         {
             Toilets.checkCycle();
             Staff.assignCycle();
-            //System.out.println(n);
             try{Thread.sleep(1000);}catch(Exception e){System.out.println(e);}
         }    
     }
