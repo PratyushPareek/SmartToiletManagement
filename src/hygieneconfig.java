@@ -177,11 +177,12 @@ public class hygieneconfig extends javax.swing.JFrame {
 
     private void submitbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbuttonMouseClicked
         try{
-            if(Pattern.matches("[0-5],{.}",jTextField1.getText()) && Pattern.matches("[0-900],{.}",jTextField2.getText()))
+            if(Pattern.matches("^[0-5]{1}$",jTextField1.getText()) && Pattern.matches("^[0-9]{1,3}$",jTextField2.getText()))
             {
                 GasSensor.threshold = Double.parseDouble(jTextField1.getText());
                 TurbiditySensor.threshold = Double.parseDouble(jTextField2.getText());
                 JOptionPane.showMessageDialog(this,"Record added");
+                dispose();
             }
             else
             {

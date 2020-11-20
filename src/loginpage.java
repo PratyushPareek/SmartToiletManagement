@@ -186,6 +186,8 @@ public class loginpage extends javax.swing.JFrame {
         String password=new String(p);
         if((username.equals("Admin Gupta")  &&  password.equals("password")))
         {   
+            Staff.setup();
+            Toilets.setup();
             loginpage login1=new loginpage();
             mainscr mains=new mainscr();
             if(true)

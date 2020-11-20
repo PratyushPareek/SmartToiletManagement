@@ -11,18 +11,33 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author LENOVO
  */
+class UpdaterStaff implements Runnable
+{
+    Staffstatus s;
+    UpdaterStaff(Staffstatus p)
+    {
+        s=p;
+    }        
+    @Override
+    public void run()
+    {
+        while(true)
+        {
+            try{Thread.sleep(2000);}catch(Exception e){System.out.println(e);}
+            s.removeData();
+            s.showData();
+        }    
+    }        
+}        
+
 public class Staffstatus extends javax.swing.JFrame {
 
-    static DefaultTableModel model;
     
     public Staffstatus() {
         initComponents();
-        
-        model = (DefaultTableModel) jTable1.getModel();
-        for(StaffMember s : Staff.StaffTable)
-                    {
-                        model.insertRow(model.getRowCount(), new Object[]{ s.id, s.name, s.gender, s.isWorking,s.email,s.contactNo });
-                    }  
+        showData();
+        new Thread(new UpdaterStaff(this)).start();
+
     }
 
     /**
@@ -99,7 +114,7 @@ public class Staffstatus extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Gender", "Is working", "Email", "Contact"
+                "ID", "Name", "Gender", "Is Working", "Email", "Contact"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -119,15 +134,26 @@ public class Staffstatus extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backbuttonMouseClicked
+        removeData();
         new mainscr().setVisible(true);
-        int rowCount = model.getRowCount();
-        //Remove rows one by one from the end of the table
-        for (int i = rowCount - 1; i >= 0; i--) {
-            model.removeRow(i);
-}
         dispose();
     }//GEN-LAST:event_backbuttonMouseClicked
 
+    void showData()
+    {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for(StaffMember s : Staff.StaffTable)
+        {
+            model.insertRow(model.getRowCount(), new Object[]{ s.id,s.name,s.gender, s.isWorking,s.email,s.contactNo});
+        }  
+    }        
+    void removeData()
+    {
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Name","Gender","Is Working","Email","Contact"}));
+    }        
+            
+    
     /**
      * @param args the command line arguments
      */
@@ -158,7 +184,8 @@ public class Staffstatus extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Staffstatus().setVisible(true);
+                //new Staffstatus().setVisible(true);
+                
             }
         });
     }

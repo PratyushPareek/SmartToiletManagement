@@ -28,12 +28,11 @@ public class mainscr extends javax.swing.JFrame {
      */
     public mainscr() {
         initComponents();
-        Staff.setup();
-        Toilets.setup();
+        
         if(i%2!=0)
                 {
-                    changeimage(startButton,"/images/stop.jpeg");
-                    jLabel5.setText("Start Monitoring");
+                    changeimage(startButton,"/images/stop.png");
+                    jLabel5.setText("Stop Monitoring");
             
                 }  
         
@@ -394,19 +393,16 @@ public class mainscr extends javax.swing.JFrame {
     private void addstaffbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addstaffbuttonMouseClicked
         new mainscr().setVisible(false);
         new Register().setVisible(true);
-        dispose();
     }//GEN-LAST:event_addstaffbuttonMouseClicked
 
     private void updatebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatebuttonMouseClicked
         new mainscr().setVisible(false);
         new Searchstaff().setVisible(true);
-        dispose();
     }//GEN-LAST:event_updatebuttonMouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         new mainscr().setVisible(false);
         new hygieneconfig().setVisible(true);
-        dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void startButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseClicked
@@ -425,7 +421,7 @@ public class mainscr extends javax.swing.JFrame {
         else
         {
             jLabel5.setText("Stop Monitoring");
-            changeimage(startButton,"/images/stop.jpeg");
+            changeimage(startButton,"/images/stop.png");
             
             java.util.Date date=new java.util.Date(System.currentTimeMillis());  
             mainscr.log = new Log(date);
@@ -441,12 +437,10 @@ public class mainscr extends javax.swing.JFrame {
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
            new Staffstatus().setVisible(true);
-           dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         new ToiletStatus().setVisible(true);
-           dispose();
     }//GEN-LAST:event_jLabel7MouseClicked
 
     /**

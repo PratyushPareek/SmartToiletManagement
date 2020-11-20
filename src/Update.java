@@ -341,10 +341,10 @@ public class Update extends javax.swing.JFrame {
         if(nameValidity&&emailValidity&&contactValidity&&genderValidity)
         {
             Long cont = Long.parseLong(contact.getText());
-            s.name = name.getText();
-            s.email = email.getText();
-            s.contactNo = cont;
-            s.gender = gender.getText();
+            Staff.findMemberByID(s.id).name = name.getText();
+            Staff.findMemberByID(s.id).email = email.getText();
+            Staff.findMemberByID(s.id).contactNo = cont;
+            Staff.findMemberByID(s.id).gender = gender.getText();
             JOptionPane.showMessageDialog(null,"Updated successfully.");
             new mainscr().setVisible(true);
             dispose();

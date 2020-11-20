@@ -72,6 +72,8 @@ public class Staff
             }
         }catch(Exception e){System.out.println(e);} 
         */
+        /*Me*/StaffTable.add(new StaffMember(1,"Woody Allen","pareekpratyush2626@gmail.com",1634567890,"M"));
+
         StaffTable.add(new StaffMember(2,"Arya Stark","noOne@fakemail.com",1234567890,"F"));
         StaffTable.add(new StaffMember(3,"Jon Snow","bastard@fakemail.com",1834567890,"M"));
         StaffTable.add(new StaffMember(4,"Sansa Stark","princess@fakemail.com",1294567890,"F"));
@@ -79,8 +81,7 @@ public class Staff
         StaffTable.add(new StaffMember(6,"Catelyn Stark","cat@fakemail.com",1934567890,"F"));
         StaffTable.add(new StaffMember(7,"Theon Greyjoy","reek@fakemail.com",1534567890,"M"));
         
-        /*Me*/StaffTable.add(new StaffMember(1,"Woody Allen","pareekpratyush2626@gmail.com",1634567890,"M"));
-
+        
         
         for(StaffMember s : StaffTable)
         {

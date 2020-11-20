@@ -11,18 +11,33 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author vkb
  */
+class UpdaterToilets implements Runnable
+{
+    ToiletStatus s;
+    UpdaterToilets(ToiletStatus p)
+    {
+        s=p;
+    }        
+    @Override
+    public void run()
+    {
+        while(true)
+        {
+            try{Thread.sleep(2000);}catch(Exception e){System.out.println(e);}
+            s.removeData();
+            s.showData();
+        }    
+    }        
+}      
+
 public class ToiletStatus extends javax.swing.JFrame {
 
-     DefaultTableModel model;
-    static Boolean onIt = true;
     
     public ToiletStatus() {
-        initComponents();        
-        model = (DefaultTableModel) jTable1.getModel(); 
-        for(Toilet t : Toilets.ToiletTable)
-                    {
-                        model.insertRow(model.getRowCount(), new Object[]{ t.id, t.gender,t.isClean,t.gs.value,t.ts.value });
-                    }  
+        initComponents();  
+        showData();
+        new Thread(new UpdaterToilets(this)).start();
+
     }
 
     /**
@@ -122,12 +137,24 @@ public class ToiletStatus extends javax.swing.JFrame {
      
     
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        removeData();
         new mainscr().setVisible(true);
-        onIt = false;
-        model = (DefaultTableModel) jTable1.getModel();
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
-
+    
+    void showData()
+    {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel(); 
+        for(Toilet t : Toilets.ToiletTable)
+        {
+            model.insertRow(model.getRowCount(), new Object[]{ t.id, t.gender,t.isClean,String.format("%.2f",t.gs.value),String.format("%.2f",t.ts.value) });
+        }  
+    }   
+    
+    void removeData()
+    {
+        jTable1.setModel(new DefaultTableModel(null,new String[]{"ID","Gender","Is Clean","Gas Sensor reads","Turbidity Sensor reads"}));
+    }
     /**
      * @param args the command line arguments
      */
@@ -158,7 +185,7 @@ public class ToiletStatus extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ToiletStatus().setVisible(true);  
+                //new ToiletStatus().setVisible(true);  
                   
             }
         });
