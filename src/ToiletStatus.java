@@ -13,12 +13,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ToiletStatus extends javax.swing.JFrame {
 
-    DefaultTableModel model;
+     DefaultTableModel model;
+    static Boolean onIt = true;
     
     public ToiletStatus() {
-        initComponents();
-        
-        model = (DefaultTableModel) jTable1.getModel();
+        initComponents();        
+        model = (DefaultTableModel) jTable1.getModel(); 
+        for(Toilet t : Toilets.ToiletTable)
+                    {
+                        model.insertRow(model.getRowCount(), new Object[]{ t.id, t.gender,t.isClean,t.gs.value,t.ts.value });
+                    }  
     }
 
     /**
@@ -76,19 +80,16 @@ public class ToiletStatus extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 231, Short.MAX_VALUE)
+                .addGap(216, 216, 216)
                 .addComponent(jLabel1)
-                .addGap(246, 246, 246))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
@@ -118,9 +119,12 @@ public class ToiletStatus extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+     
+    
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         new mainscr().setVisible(true);
+        onIt = false;
+        model = (DefaultTableModel) jTable1.getModel();
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -154,7 +158,8 @@ public class ToiletStatus extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ToiletStatus().setVisible(true);
+                new ToiletStatus().setVisible(true);  
+                  
             }
         });
     }

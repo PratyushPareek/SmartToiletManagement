@@ -20,7 +20,7 @@ import java.lang.*;
 
 
 public class mainscr extends javax.swing.JFrame {
-    int i=0;
+    static int i=0;
     Thread T;
     public static Log log;
     /**
@@ -30,7 +30,12 @@ public class mainscr extends javax.swing.JFrame {
         initComponents();
         Staff.setup();
         Toilets.setup();
-        
+        if(i%2!=0)
+                {
+                    changeimage(startButton,"/images/stop.jpeg");
+                    jLabel5.setText("Start Monitoring");
+            
+                }  
         
     }
 
@@ -475,6 +480,7 @@ public class mainscr extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new mainscr().setVisible(true);
+                  
             }
         });
     }

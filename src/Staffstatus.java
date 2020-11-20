@@ -13,13 +13,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Staffstatus extends javax.swing.JFrame {
 
-    DefaultTableModel model;
+    static DefaultTableModel model;
     
     public Staffstatus() {
         initComponents();
         
         model = (DefaultTableModel) jTable1.getModel();
-        
+        for(StaffMember s : Staff.StaffTable)
+                    {
+                        model.insertRow(model.getRowCount(), new Object[]{ s.id, s.name, s.gender, s.isWorking,s.email,s.contactNo });
+                    }  
     }
 
     /**
@@ -117,6 +120,11 @@ public class Staffstatus extends javax.swing.JFrame {
 
     private void backbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backbuttonMouseClicked
         new mainscr().setVisible(true);
+        int rowCount = model.getRowCount();
+        //Remove rows one by one from the end of the table
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+}
         dispose();
     }//GEN-LAST:event_backbuttonMouseClicked
 

@@ -72,7 +72,7 @@ public class Staff
             }
         }catch(Exception e){System.out.println(e);} 
         */
-        StaffTable.add(new StaffMember(2,"Arya Stark","noOne@gmail.com",1234567890,"F"));
+        StaffTable.add(new StaffMember(2,"Arya Stark","noOne@fakemail.com",1234567890,"F"));
         StaffTable.add(new StaffMember(3,"Jon Snow","bastard@fakemail.com",1834567890,"M"));
         StaffTable.add(new StaffMember(4,"Sansa Stark","princess@fakemail.com",1294567890,"F"));
         StaffTable.add(new StaffMember(5,"Robb Stark","wolfie@fakemail.com",1634567890,"M"));
