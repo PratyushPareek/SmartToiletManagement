@@ -367,16 +367,19 @@ public class mainscr extends javax.swing.JFrame {
     private void addstaffbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addstaffbuttonMouseClicked
         new mainscr().setVisible(false);
         new Register().setVisible(true);
+        dispose();
     }//GEN-LAST:event_addstaffbuttonMouseClicked
 
     private void updatebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatebuttonMouseClicked
         new mainscr().setVisible(false);
         new Searchstaff().setVisible(true);
+        dispose();
     }//GEN-LAST:event_updatebuttonMouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         new mainscr().setVisible(false);
         new hygieneconfig().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jLabel8MouseClicked
 
     /**

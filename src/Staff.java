@@ -72,14 +72,14 @@ public class Staff
             }
         }catch(Exception e){System.out.println(e);} 
         */
-        StaffTable.add(new StaffMember(2,"Arya Stark","noOne@fakemail.com",1234567890,"F"));
+        StaffTable.add(new StaffMember(2,"Arya Stark","noOne@gmail.com",1234567890,"F"));
         StaffTable.add(new StaffMember(3,"Jon Snow","bastard@fakemail.com",1834567890,"M"));
         StaffTable.add(new StaffMember(4,"Sansa Stark","princess@fakemail.com",1294567890,"F"));
         StaffTable.add(new StaffMember(5,"Robb Stark","wolfie@fakemail.com",1634567890,"M"));
         StaffTable.add(new StaffMember(6,"Catelyn Stark","cat@fakemail.com",1934567890,"F"));
         StaffTable.add(new StaffMember(7,"Theon Greyjoy","reek@fakemail.com",1534567890,"M"));
         
-        /**/StaffTable.add(new StaffMember(1,"Woody Allen","pareekpratyush2626@gmail.com",1634567890,"M"));
+        /*Me*/StaffTable.add(new StaffMember(1,"Woody Allen","pareekpratyush2626@gmail.com",1634567890,"M"));
 
         
         for(StaffMember s : StaffTable)
@@ -90,18 +90,17 @@ public class Staff
         }    
     }
     
-    public static Vector<StaffMember> findMemberByName(String name)
+    public static StaffMember findMemberByName(String name)
     {
         name = name.trim().toLowerCase();
-        Vector<StaffMember> ReturnTable = new Vector<StaffMember>();
         
         for(StaffMember sm : StaffTable)
         {
             String S = sm.name.trim().toLowerCase();
             if(S.contains(name))
-                ReturnTable.add(sm);
+                return sm;
         }
-        return ReturnTable;
+        return null;
     }        
     
     public static StaffMember findMemberByID(int id)
@@ -226,7 +225,7 @@ public class Staff
                 mail.addRecipient(findMemberByID(smid).email);
                 mail.send();
             }
-            catch(Exception e){System.out.println(e);}    
+            catch(Exception e){JOptionPane.showMessageDialog(null,e);}    
         }
     } 
     

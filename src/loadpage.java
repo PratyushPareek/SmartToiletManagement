@@ -137,7 +137,7 @@ public class loadpage extends javax.swing.JFrame {
         try{
             for(int i=0;i<=100;i++)
             {
-                Thread.sleep(70);
+                Thread.sleep(15);
                 load.loadnumber.setText(Integer.toString(i)+"%");
                 load.loadbar.setValue(i);
                 if(i==100)

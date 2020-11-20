@@ -13,7 +13,10 @@ import java.util.regex.*;
  * @author LENOVO
  */
 public class Register extends javax.swing.JFrame {
-
+    Boolean nameValidity = true;
+    Boolean emailValidity = true;
+    Boolean contactValidity = true;
+    Boolean genderValidity = true;
     /**
      * Creates new form Register
      */
@@ -265,13 +268,22 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_emailActionPerformed
 
     private void cancelbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelbuttonMouseClicked
-        
-        new Register().setVisible(false);
+
         new mainscr().setVisible(true);
+        dispose();
     }//GEN-LAST:event_cancelbuttonMouseClicked
 
     private void submitbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbuttonMouseClicked
-        
+        if(nameValidity&&emailValidity&&contactValidity&&genderValidity)
+        {
+            Long cont = Long.parseLong(contact.getText());
+            StaffMember s = new StaffMember(Staff.generateID(),name.getText(),email.getText(),cont,gender.getText());
+            Staff.addMember(s);
+            JOptionPane.showMessageDialog(null,"Member added successfully.");
+            new mainscr().setVisible(true);
+            dispose();
+        }    
+            
     }//GEN-LAST:event_submitbuttonMouseClicked
 
     private void nameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyReleased
@@ -279,10 +291,16 @@ public class Register extends javax.swing.JFrame {
         Pattern patt=Pattern.compile(PATTERN);
         Matcher match = patt.matcher(name.getText());
         if(!match.matches()){
-            jLabel3.setText("Naming is incorrect!");
+            jLabel3.setText("Please enter a valid name");
+            nameValidity = false;
+            name.setText(null);
         }
         else
+        { 
+            nameValidity = true;
             jLabel3.setText(null);
+        }   
+            
     }//GEN-LAST:event_nameKeyReleased
 
     private void contactKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactKeyReleased
@@ -290,10 +308,14 @@ public class Register extends javax.swing.JFrame {
         Pattern patt=Pattern.compile(PATTERN);
         Matcher match = patt.matcher(contact.getText());
         if(!match.matches()){
-            jLabel8.setText("Contact is incorrect!");
+            contactValidity = false;
+            jLabel8.setText("Please enter a valid contact number");
         }
         else
+        {
+            contactValidity = true;
             jLabel8.setText(null);
+        }    
     }//GEN-LAST:event_contactKeyReleased
 
     private void jPanel2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyReleased
@@ -301,14 +323,18 @@ public class Register extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel2KeyReleased
 
     private void emailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyReleased
-        String PATTERN = "^[a-zA-Z0-9\\W]{0,30}[@][a-zA-Z]{0,10}[.][a-zA-Z]{0,10}$";
+        String PATTERN = "^[a-zA-Z0-9\\W]{0,30}[@][a-zA-Z\\W]{0,20}[.][a-zA-Z]{0,10}$";
         Pattern patt=Pattern.compile(PATTERN);
         Matcher match = patt.matcher(email.getText());
         if(!match.matches()){
-            jLabel9.setText("Email is incorrect!");
+            emailValidity = false;
+            jLabel9.setText("Please enter a valid Email ID");
         }
         else
+        {
+            emailValidity = true;
             jLabel9.setText(null);
+        }    
     }//GEN-LAST:event_emailKeyReleased
 
     private void genderKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_genderKeyReleased
@@ -316,10 +342,16 @@ public class Register extends javax.swing.JFrame {
         Pattern patt=Pattern.compile(PATTERN);
         Matcher match = patt.matcher(gender.getText());
         if(!match.matches()){
-            jLabel10.setText("Enter M for male F for female");
+            genderValidity = false;
+            jLabel10.setText("Please enter \"M\" for Male \"F\" for Female");
+            gender.setText(null);
         }
         else
+        {
+            genderValidity = true;
             jLabel10.setText(null);
+        }    
+            
     }//GEN-LAST:event_genderKeyReleased
 
     /**

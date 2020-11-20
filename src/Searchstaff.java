@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,7 +12,7 @@
  * @author LENOVO
  */
 public class Searchstaff extends javax.swing.JFrame {
-
+    String selectedValue;
     /**
      * Creates new form Searchstaff
      */
@@ -162,22 +165,35 @@ public class Searchstaff extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        String selectedValue = jComboBox1.getSelectedItem().toString();
-        if (selectedValue== "Search by ID:")
-        {
-            jTextField1.setText("Enter your ID");
-        }
-        else
-        {
-            jTextField1.setText("Enter your name");
-        }
+        selectedValue = jComboBox1.getSelectedItem().toString();
+        
             // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Searchstaff ss=new Searchstaff();
-        ss.setVisible(true);
-        Update up=new Update();
+        String val = jTextField1.getText();
+        Update up;
+        if(selectedValue.contains("name"))
+        {
+            try
+            {
+                StaffMember s = Staff.findMemberByName(val);
+                up = new Update(s);
+            }
+            catch(Exception e){JOptionPane.showMessageDialog(null, "Please enter a valid name");}
+        }    
+            
+        else
+        {   
+            try
+            {
+                int valID = Integer.parseInt(val);
+                StaffMember s = Staff.findMemberByName(val);
+                up = new Update(s);
+            }
+            catch(Exception e){JOptionPane.showMessageDialog(null, "Please enter a valid ID");}
+            
+        }    
         up.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
