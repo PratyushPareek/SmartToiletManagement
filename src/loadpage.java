@@ -21,10 +21,7 @@ public class loadpage extends javax.swing.JFrame {
     public loadpage() {
         initComponents();
         
-        java.util.Date date=new java.util.Date(System.currentTimeMillis());  
-        System.out.println(new java.util.Date(System.currentTimeMillis()));  
         
-        log = new Log(date);
 
     }
 
