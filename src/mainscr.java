@@ -13,6 +13,10 @@ import java.time.LocalDateTime;
  */
 import java.time.*;
 import java.io.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
+
 
 public class mainscr extends javax.swing.JFrame {
 
@@ -21,7 +25,6 @@ public class mainscr extends javax.swing.JFrame {
      */
     public mainscr() {
         initComponents();
-        
         
         
     }
@@ -367,6 +370,11 @@ public class mainscr extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void changeimage(JLabel button,String resourceimg)
+    {
+        ImageIcon aimg = new ImageIcon(getClass().getResource(resourceimg));
+        button.setIcon(aimg);
+    }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         try{loadpage.log.writer.close();}
         catch(Exception e){System.out.println(e);}
@@ -393,6 +401,8 @@ public class mainscr extends javax.swing.JFrame {
 
     private void startButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseClicked
         // TODO add your handling code here:
+      
+        
         Staff.setup();
         Toilets.setup();
         new Thread(new BGThreads()).start();
@@ -400,8 +410,17 @@ public class mainscr extends javax.swing.JFrame {
         java.util.Date date=new java.util.Date(System.currentTimeMillis());  
         loadpage.log = new Log(date);
         
-        startButton.setVisible(false);
-        stopButton.setVisible(true);
+        if(i%2!=0)
+        {
+            changeimage(startButton,"/images/stop.jpeg");
+            i++;
+        }
+        else
+        {
+            changeimage(startButton,"/images/start.png");
+            i++;
+        }
+        
     }//GEN-LAST:event_startButtonMouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
