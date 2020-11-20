@@ -10,7 +10,7 @@
  */
 public class TurbiditySensor 
 {
-    public static double threshold = 750;
+    public static double threshold = 810;
     double value;
     
     TurbiditySensor()

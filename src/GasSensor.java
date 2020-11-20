@@ -10,7 +10,7 @@
  */
 public class GasSensor 
 {
-    public static double threshold = 4;
+    public static double threshold = 4.5;
     double value;
     
     GasSensor()
