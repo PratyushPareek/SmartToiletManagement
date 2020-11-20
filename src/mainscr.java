@@ -1,3 +1,6 @@
+
+import java.time.LocalDateTime;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,6 +11,9 @@
  *
  * @author LENOVO
  */
+import java.time.*;
+import java.io.*;
+
 public class mainscr extends javax.swing.JFrame {
 
     /**
@@ -15,6 +21,12 @@ public class mainscr extends javax.swing.JFrame {
      */
     public mainscr() {
         initComponents();
+        
+        //To be removed
+        Staff.setup();
+        Toilets.setup();
+        new Thread(new BGThreads()).start();
+        
     }
 
     /**
@@ -343,6 +355,8 @@ public class mainscr extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        try{loadpage.log.writer.close();}
+        catch(Exception e){System.out.println(e);}
         System.exit(0);          // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 

@@ -51,7 +51,8 @@ public class Toilets
                     MQueue.addLast(t.id);
                 else FQueue.addLast(t.id);
                 t.isClean = false;
-                System.out.println(t.id + " is unclean.");
+                try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis()) +" | Toilet "+t.id+" is unclean. \n");}
+                catch(Exception e){System.out.println(e);}
             }
         }            
     }

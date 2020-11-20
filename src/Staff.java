@@ -13,6 +13,8 @@ import java.sql.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 import java.lang.*;
+import java.io.*;
+import com.email.durgesh.Email;
 
 class BGCleaned implements Runnable
 {            
@@ -29,10 +31,11 @@ class BGCleaned implements Runnable
     @Override 
     public void run() 
     {
-        try{Thread.sleep(5000);}catch(Exception e){System.out.println(e);}
+        try{Thread.sleep(3500+(long)(Math.random()*4000));}catch(Exception e){System.out.println(e);}
         Toilets.findToiletByID(tid).isClean = true;
         Staff.findMemberByID(smid).isWorking = false;
-        System.out.println(tid+" was cleaned by "+smid);
+        try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+tid+" was cleaned by "+Staff.findMemberByID(smid).name+"\n");}
+        catch(Exception e){System.out.println(e);}
         if(g.contains("M"))
             Staff.MStaffQueue.addLast(smid);
         else Staff.FStaffQueue.addLast(smid);   
@@ -159,8 +162,9 @@ public class Staff
         {
             sendAlert(Toilets.MQueue.getFirst(),MStaffQueue.getFirst());
             findMemberByID(MStaffQueue.getFirst()).isWorking = true;
-            System.out.println(Toilets.MQueue.getFirst() + " is being cleaned by " + MStaffQueue.getFirst());
-            
+            try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+Toilets.MQueue.getFirst()+" is being cleaned by "+Staff.findMemberByID(MStaffQueue.getFirst()).name+"\n");}
+            catch(Exception e){System.out.println(e);}
+        
             new Thread(new BGCleaned(Toilets.MQueue.getFirst(),"M",MStaffQueue.getFirst())).start();
             
             Toilets.MQueue.removeFirst();
@@ -170,7 +174,8 @@ public class Staff
         {
             sendAlert(Toilets.FQueue.getFirst(),FStaffQueue.getFirst());
             findMemberByID(FStaffQueue.getFirst()).isWorking = true;
-            System.out.println(Toilets.FQueue.getFirst() + " is being cleaned by " + FStaffQueue.getFirst());
+            try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+Toilets.FQueue.getFirst()+" is being cleaned by "+Staff.findMemberByID(FStaffQueue.getFirst()).name+"\n");}
+            catch(Exception e){System.out.println(e);}
             
             new Thread(new BGCleaned(Toilets.FQueue.getFirst(),"F",FStaffQueue.getFirst())).start();
             
@@ -190,8 +195,18 @@ public class Staff
     public static void sendAlert(int tid, int smid)
     {
         
-    }
-    
+        try
+        {
+            Email mail = new Email("nightmareDarkrai26@gmail.com","don'tLook26*");
+            mail.setFrom("nightmareDarkrai26@gmail.com","Crimson Shade");
+            mail.setSubject("Get back to work");
+            mail.setContent("<body>Dear "+findMemberByID(smid).name+",<br>"+"You have been assigned to clean Toilet "+tid+"<br>Get back to work immediately.<br>"+"<br>Yours truly, <br>Admin Gupta</body>" , "text/html");
+            mail.addRecipient(findMemberByID(smid).email);
+            mail.send();
+        }
+        catch(Exception e){System.out.println(e);}
+    } 
+
     public static Connection getConnection() 
     {
         try{

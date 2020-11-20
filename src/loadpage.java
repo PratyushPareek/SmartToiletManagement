@@ -1,3 +1,6 @@
+
+import java.time.LocalDateTime;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,8 +16,16 @@ public class loadpage extends javax.swing.JFrame {
     /**
      * Creates new form loadpage
      */
+    public static Log log;
+    
     public loadpage() {
         initComponents();
+        
+        java.util.Date date=new java.util.Date(System.currentTimeMillis());  
+        System.out.println(new java.util.Date(System.currentTimeMillis()));  
+        
+        log = new Log(date);
+
     }
 
     /**

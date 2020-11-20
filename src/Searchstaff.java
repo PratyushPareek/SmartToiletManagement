@@ -95,7 +95,6 @@ public class Searchstaff extends javax.swing.JFrame {
         });
 
         jTextField1.setBackground(new java.awt.Color(0, 204, 240));
-        jTextField1.setText("Enter your name");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
