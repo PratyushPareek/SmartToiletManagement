@@ -34,7 +34,7 @@ class BGCleaned implements Runnable
         try{Thread.sleep(3500+(long)(Math.random()*4000));}catch(Exception e){System.out.println(e);}
         Toilets.findToiletByID(tid).isClean = true;
         Staff.findMemberByID(smid).isWorking = false;
-        try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+tid+" was cleaned by "+Staff.findMemberByID(smid).name+"\n");}
+        try{mainscr.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+tid+" was cleaned by "+Staff.findMemberByID(smid).name+"\n");}
         catch(Exception e){System.out.println(e);}
         if(g.contains("M"))
             Staff.MStaffQueue.addLast(smid);
@@ -182,7 +182,7 @@ public class Staff
         {
             sendAlert(Toilets.MQueue.getFirst(),MStaffQueue.getFirst());
             findMemberByID(MStaffQueue.getFirst()).isWorking = true;
-            try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+Toilets.MQueue.getFirst()+" is being cleaned by "+Staff.findMemberByID(MStaffQueue.getFirst()).name+"\n");}
+            try{mainscr.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+Toilets.MQueue.getFirst()+" is being cleaned by "+Staff.findMemberByID(MStaffQueue.getFirst()).name+"\n");}
             catch(Exception e){System.out.println(e);}
         
             new Thread(new BGCleaned(Toilets.MQueue.getFirst(),"M",MStaffQueue.getFirst())).start();
@@ -194,7 +194,7 @@ public class Staff
         {
             sendAlert(Toilets.FQueue.getFirst(),FStaffQueue.getFirst());
             findMemberByID(FStaffQueue.getFirst()).isWorking = true;
-            try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+Toilets.FQueue.getFirst()+" is being cleaned by "+Staff.findMemberByID(FStaffQueue.getFirst()).name+"\n");}
+            try{mainscr.log.writer.write(new java.util.Date(System.currentTimeMillis())+" | Toilet "+Toilets.FQueue.getFirst()+" is being cleaned by "+Staff.findMemberByID(FStaffQueue.getFirst()).name+"\n");}
             catch(Exception e){System.out.println(e);}
             
             new Thread(new BGCleaned(Toilets.FQueue.getFirst(),"F",FStaffQueue.getFirst())).start();

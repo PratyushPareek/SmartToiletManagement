@@ -15,16 +15,21 @@ import java.time.*;
 import java.io.*;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.lang.*;
 
 
 
 public class mainscr extends javax.swing.JFrame {
-
+    int i=0;
+    Thread T;
+    public static Log log;
     /**
      * Creates new form mainscr
      */
     public mainscr() {
         initComponents();
+        Staff.setup();
+        Toilets.setup();
         
         
     }
@@ -376,7 +381,7 @@ public class mainscr extends javax.swing.JFrame {
         button.setIcon(aimg);
     }
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        try{loadpage.log.writer.close();}
+        try{mainscr.log.writer.close();}
         catch(Exception e){System.out.println(e);}
         System.exit(0);          // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -402,22 +407,28 @@ public class mainscr extends javax.swing.JFrame {
     private void startButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_startButtonMouseClicked
         // TODO add your handling code here:
       
-        
-        Staff.setup();
-        Toilets.setup();
-        new Thread(new BGThreads()).start();
-        
-        java.util.Date date=new java.util.Date(System.currentTimeMillis());  
-        loadpage.log = new Log(date);
-        
         if(i%2!=0)
         {
-            changeimage(startButton,"/images/stop.jpeg");
+            changeimage(startButton,"/images/start.png");
+            jLabel5.setText("Start Monitoring");
+            
+            try{mainscr.log.writer.close();}
+            catch(Exception e){System.out.println(e);}
+            T.stop();
             i++;
         }
         else
         {
-            changeimage(startButton,"/images/start.png");
+            jLabel5.setText("Stop Monitoring");
+            changeimage(startButton,"/images/stop.jpeg");
+            
+            java.util.Date date=new java.util.Date(System.currentTimeMillis());  
+            mainscr.log = new Log(date);
+            
+            BGThreads bgt = new BGThreads();
+            T = new Thread(bgt);
+            T.start();
+            
             i++;
         }
         

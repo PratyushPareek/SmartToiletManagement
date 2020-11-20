@@ -16,7 +16,6 @@ public class loadpage extends javax.swing.JFrame {
     /**
      * Creates new form loadpage
      */
-    public static Log log;
     
     public loadpage() {
         initComponents();

@@ -56,7 +56,7 @@ public class Toilets
                     if(t.gender.contains("M"))
                         MQueue.addLast(t.id);
                     else FQueue.addLast(t.id);
-                    try{loadpage.log.writer.write(new java.util.Date(System.currentTimeMillis()) +" | Toilet "+t.id+" is unclean. | Gas Sensor: "+String.format("%.2f",t.gs.value)+"V |"+"Turbidity Sensor: "+String.format("%.2f",t.ts.value)+"NTU |\n");}
+                    try{mainscr.log.writer.write(new java.util.Date(System.currentTimeMillis()) +" | Toilet "+t.id+" is unclean. | Gas Sensor: "+String.format("%.2f",t.gs.value)+"V |"+"Turbidity Sensor: "+String.format("%.2f",t.ts.value)+"NTU |\n");}
                     catch(Exception e){System.out.println(e);}
                 }
             }
