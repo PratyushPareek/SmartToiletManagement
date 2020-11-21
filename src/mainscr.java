@@ -415,7 +415,7 @@ public class mainscr extends javax.swing.JFrame {
             
             try{mainscr.log.writer.close();}
             catch(Exception e){System.out.println(e);}
-            T.stop();
+            if(T!=null){T.stop();}
             i++;
         }
         else
