@@ -13,10 +13,11 @@ import java.util.*;
 
 class BGThreads implements Runnable
 {
+    public static boolean B;
     @Override
     public void run() 
     {
-        while(true)
+        while(B)
         {
             Toilets.checkCycle();
             Staff.assignCycle();

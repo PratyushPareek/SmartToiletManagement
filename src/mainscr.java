@@ -301,7 +301,7 @@ public class mainscr extends javax.swing.JFrame {
         });
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Restroom Status");
+        jLabel13.setText("Toilets Status");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -414,7 +414,8 @@ public class mainscr extends javax.swing.JFrame {
             jLabel5.setText("Start Monitoring");
             
             try{mainscr.log.writer.close();}
-            catch(Exception e){System.out.println(e+"BA");}
+            catch(Exception e){System.out.println(e);}
+            BGThreads.B=false;
             if(T!=null){T.stop();}
             i++;
         }
@@ -429,7 +430,7 @@ public class mainscr extends javax.swing.JFrame {
             BGThreads bgt = new BGThreads();
             T = new Thread(bgt);
             T.start();
-            
+            BGThreads.B=true;
             i++;
         }
         
