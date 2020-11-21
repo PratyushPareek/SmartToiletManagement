@@ -414,7 +414,7 @@ public class mainscr extends javax.swing.JFrame {
             jLabel5.setText("Start Monitoring");
             
             try{mainscr.log.writer.close();}
-            catch(Exception e){System.out.println(e);}
+            catch(Exception e){System.out.println(e+"BA");}
             if(T!=null){T.stop();}
             i++;
         }
