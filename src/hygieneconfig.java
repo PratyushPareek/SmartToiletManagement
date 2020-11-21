@@ -180,17 +180,25 @@ public class hygieneconfig extends javax.swing.JFrame {
 
     private void submitbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitbuttonMouseClicked
         try{
-            if(Pattern.matches("^[0-5]{1}$",GSField.getText()) && Pattern.matches("^[0-9]{1,3}$",TSField.getText()))
+            if(( Pattern.matches("[0-9]*\\.[0-9]*",GSField.getText()) || Pattern.matches("[0-5]", GSField.getText()) ) && ( Pattern.matches("[0-9]*\\.[0-9]*",TSField.getText()) || Pattern.matches("[0-9]*", TSField.getText()) ))
             {
-                GasSensor.threshold = Double.parseDouble(GSField.getText());
-                TurbiditySensor.threshold = Double.parseDouble(TSField.getText());
-                JOptionPane.showMessageDialog(this,"Record added");
-                dispose();
+                double gst = Double.parseDouble(GSField.getText());
+                double tst = Double.parseDouble(TSField.getText());
+                if(0<gst&&gst<5&&0<tst&&tst<900)
+                {    
+                    GasSensor.threshold = gst;
+                    TurbiditySensor.threshold = tst;
+                    JOptionPane.showMessageDialog(this,"Thresholds updated.");
+                    dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(this,"The range of the gas sensors is 0 to 5 V and that of the turbidity sensors is 0 to 900 NTU.");      
+                }
             }
             else
             {
-                JOptionPane.showMessageDialog(this,"The range of the gas sensors is 0 to 5 V and that of the turbidity sensors is 0 to 900 NTU.");  
-                    
+                JOptionPane.showMessageDialog(this,"Please enter a valid input.");  
             }
         }
         catch(Exception e){
